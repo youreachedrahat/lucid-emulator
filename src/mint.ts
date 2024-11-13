@@ -1,5 +1,5 @@
 import { applyDoubleCborEncoding, MintingPolicy } from "@lucid-evolution/lucid"
-import cfMint from "./compiled/mint.json" with {type: "json"}
+import cfMint from "../compiled/mint.json" with {type: "json"}
 
 
 const Mint: MintingPolicy = {

@@ -1,5 +1,5 @@
 import { Address, applyDoubleCborEncoding, Data, Emulator, EmulatorAccount, LucidEvolution, paymentCredentialOf, SpendingValidator, validatorToAddress } from "@lucid-evolution/lucid"
-import cfSpend from "./compiled/spend.json" with {type: "json"}
+import cfSpend from "../compiled/spend.json" with {type: "json"}
 import { CFDatum } from "./types";
 
 const Spend: SpendingValidator = {
@@ -34,8 +34,8 @@ export async function createCampaign(account: EmulatorAccount, lucid: LucidEvolu
     console.log("txHash:# ",txHash);
     console.log("------------------------------------------");
     console.log("tx:", tx)
-    const allUTxOs = await lucid.utxosAt(contractAddress);
     emulator.awaitBlock(1)
+    const allUTxOs = await lucid.utxosAt(contractAddress);
     console.log("------------------------------------------");
     console.log("utxo: ", allUTxOs)
 }
