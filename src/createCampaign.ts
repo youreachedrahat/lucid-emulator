@@ -1,12 +1,6 @@
-import { Address, applyDoubleCborEncoding, Data, Emulator, EmulatorAccount, LucidEvolution, paymentCredentialOf, SpendingValidator, validatorToAddress } from "@lucid-evolution/lucid"
-import cfSpend from "../compiled/spend.json" with {type: "json"}
+import { Data, Emulator, EmulatorAccount, LucidEvolution, paymentCredentialOf, validatorToAddress } from "@lucid-evolution/lucid"
 import { CFDatum } from "./types";
-
-const Spend: SpendingValidator = {
-    script: applyDoubleCborEncoding(cfSpend.cborHex),
-    type: "PlutusV3"
-}
-
+import { spendingValidator } from "./validators";
 
 
 export async function createCampaign(account: EmulatorAccount, lucid: LucidEvolution, emulator: Emulator) {
@@ -19,7 +13,7 @@ export async function createCampaign(account: EmulatorAccount, lucid: LucidEvolu
         deadline: BigInt(Date.now() + 777539000)
     }
 
-    const contractAddress = validatorToAddress(lucid.config().network, Spend);
+    const contractAddress = validatorToAddress(lucid.config().network, spendingValidator);
     const tx = await lucid
         .newTx()
         .pay.ToAddressWithData(
